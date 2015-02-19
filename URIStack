@@ -1,0 +1,44 @@
+package com.example.breadcrumb;
+
+import java.util.LinkedList;
+import java.util.Stack;
+
+public class URIStack {
+
+	private static final String FRAGMENT_SEPERATOR = "/";
+
+	public URIStack() {
+		stack = new Stack<String>();
+	}
+
+	public void layURIFragmentOnStack(String sURIFragment) {
+		stack.push(sURIFragment);
+	}
+
+	public String getURIStr() {
+
+		String sURI = "";
+		Stack<String> copiedStack = (Stack) stack.clone();
+
+		while (!copiedStack.empty()) {
+			sURI = sURI + copiedStack.pop() + FRAGMENT_SEPERATOR;
+		}
+
+		return sURI;
+	}
+	
+	public LinkedList<String> getURIElements() {
+		
+		LinkedList<String> list = new LinkedList<String>();				
+		Stack<String> copiedStack = (Stack<String>) stack.clone();
+
+		while (!copiedStack.empty()) {
+			list.push(copiedStack.pop());
+		}	
+		return list;
+		
+	}
+
+	private Stack<String> stack;
+
+}
